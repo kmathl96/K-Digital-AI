@@ -1,0 +1,13 @@
+public class Company {
+	public static void main(String[] args) {
+		Employee e1 = new Employee("1001","±è°úÀå",3000000);
+		Employee e2 = new Employee("1002","¹Ú´ë¸®",2000000);
+		Employee e3 = new Employee("1003","È«Â÷Àå",4000000);
+		System.out.println(e1.info());
+		System.out.println(e2.info());
+		System.out.println(e3.info());
+		System.out.println(e1.getPay());
+		System.out.println(e2.sgetPay());
+		System.out.println(e3.getPay());
+	}
+}

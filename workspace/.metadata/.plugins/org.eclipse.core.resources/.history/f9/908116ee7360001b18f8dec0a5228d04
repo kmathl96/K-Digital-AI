@@ -1,0 +1,13 @@
+package chap6;
+
+public class Card {
+	String shape;
+	String num;
+	static int width = 20;
+	static int height = 30;
+	
+	public Card(String shape, String num) {
+		this.shape = shape;
+		this.num = num;
+	}
+}

@@ -1,0 +1,14 @@
+package chap6;
+
+public class Account {
+	String account_number;
+	String name;
+	int balance;
+	
+	public void deposit(int amount) {
+		balance += amount;
+	}
+	public void withdraw(int amount) {
+		balance -= amount;
+	}
+}

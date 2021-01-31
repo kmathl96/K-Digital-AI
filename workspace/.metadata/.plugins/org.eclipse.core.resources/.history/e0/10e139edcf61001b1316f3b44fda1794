@@ -1,0 +1,22 @@
+package emp;
+
+public class PartTime extends Employee {
+	int time;
+	int payPerTime;
+	public PartTime(String id, String name, int time, int payPerTime) {
+		super(id, name);
+		this.time = time;
+		this.payPerTime = payPerTime;
+	}
+	@Override
+	public int getPay() {
+		// TODO Auto-generated method stub
+		return super.getPay();
+	}
+	@Override
+	public String info() {
+		// TODO Auto-generated method stub
+		return super.info()+", ±Þ¿©:"+time*payPerTime;
+	}
+	
+}

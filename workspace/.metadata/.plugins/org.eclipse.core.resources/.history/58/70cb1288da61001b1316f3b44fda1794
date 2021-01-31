@@ -1,0 +1,6 @@
+public class InterfaceSample1 {
+
+	public static void main(String[] args) {
+//		MessageBean mb = new MessageBean(); // °´Ã¼ »ý¼º ¾È µÊ
+	}
+}

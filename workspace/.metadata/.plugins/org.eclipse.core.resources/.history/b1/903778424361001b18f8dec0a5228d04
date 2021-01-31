@@ -1,0 +1,72 @@
+package acc;
+
+public class SpecialAccount extends Account{
+	String grade;
+
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+	
+	public SpecialAccount() {}
+	public SpecialAccount(String ano, String owner, int balance, String grade) {
+		super(ano, owner, balance);
+		this.grade = grade;
+	}
+	@Override
+	public String getAccount_number() {
+		// TODO Auto-generated method stub
+		return super.getAccount_number();
+	}
+	@Override
+	public void setAccount_number(String account_number) {
+		// TODO Auto-generated method stub
+		super.setAccount_number(account_number);
+	}
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return super.getName();
+	}
+	@Override
+	public void setName(String name) {
+		// TODO Auto-generated method stub
+		super.setName(name);
+	}
+	@Override
+	public int getBalance() {
+		// TODO Auto-generated method stub
+		return super.getBalance();
+	}
+	@Override
+	public void setBalance(int balance) {
+		// TODO Auto-generated method stub
+		super.setBalance(balance);
+	}
+	@Override
+	public void deposit(int amount) {
+		// TODO Auto-generated method stub
+		double rate = 0;
+		switch(grade) {
+		case "VIP": rate = 0.04; break;
+		case "Gold": rate = 0.03; break;
+		case "Silver": rate = 0.02; break;
+		case "Normal": rate = 0.01; break;
+		}
+		super.deposit(amount+(int)(amount*rate));
+	}
+	@Override
+	public void withdraw(int amount) {
+		// TODO Auto-generated method stub
+		super.withdraw(amount);
+	}
+	@Override
+	public String info() {
+		// TODO Auto-generated method stub
+		return super.info();
+	}
+	
+	
+}
