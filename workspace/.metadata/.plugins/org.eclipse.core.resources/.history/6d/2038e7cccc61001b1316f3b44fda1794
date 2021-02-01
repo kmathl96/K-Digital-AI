@@ -1,5 +1,0 @@
-package emp;
-
-public class PartTime extends Employee {
-
-}

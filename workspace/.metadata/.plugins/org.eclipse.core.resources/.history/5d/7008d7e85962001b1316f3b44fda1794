@@ -1,9 +1,0 @@
-package problems;
-
-public class NestedClassExample {
-	public static void main(String[] args) {
-		Car myCar = new Car();
-		Car.Tire tire = null;
-		Car.Engine engine = null;;
-	}
-}
