@@ -2,196 +2,185 @@ import java.util.Scanner;
 
 import acc.Account;
 import acc.SpecialAccount;
+import exp.AccountException;
+import exp.BankExpCode;
 
 public class Bank {
-	private static Account[] accountArray = new Account[100];
-	private static Scanner scanner = new Scanner(System.in);
+	Scanner sc = new Scanner(System.in);
+	Account[] accs = new Account[100];
+	int accCnt;
 	
-	public static void main(String[] args) {
-		boolean run = true;
-		while(run) {
-			System.out.println("------------------------------------------");
-			System.out.println("1.계좌생성 | 2.계좌목록 | 3.예금 | 4.출금 | 5.종료");
-			System.out.println("------------------------------------------");
-			System.out.print("선택> ");
+	public int getAccCnt() {
+		return accCnt;
+	}
+	public void createAccount() throws AccountException {
+		System.out.println("--------");
+		System.out.println("일반계좌생성");
+		System.out.println("--------");
+		System.out.print("계좌번호:");
+		String id = sc.nextLine();
+		System.out.print("이름:");
+		String name = sc.nextLine();
+		System.out.print("초기입금액:");
+		int money = Integer.parseInt(sc.nextLine());
 		
+		try {
+			searchAccById(id);
+			throw new AccountException(BankExpCode.EXIST_ACC);
+		} catch (AccountException e) {
+			if (e.getErrCode()==BankExpCode.EXIST_ACC)
+				throw e;
+			accs[accCnt++] = new Account(id,name,money);
+			System.out.println("결과:일반계좌가 개설되었습니다.");
+		}		
+	}
+	public void createSpecialAccount() throws AccountException {
+		System.out.println("--------");
+		System.out.println("특수계좌생성");
+		System.out.println("--------");
+		System.out.print("계좌번호:");
+		String id = sc.nextLine();
+		System.out.print("이름:");
+		String name = sc.nextLine();
+		System.out.print("초기입금액:");
+		int money = Integer.parseInt(sc.nextLine());	
+		System.out.print("등급(VIP:1,Gold:2,Silver:3,Normal:4):");
+		int ngrade=Integer.parseInt(sc.nextLine());
+		String grade="Normal";
+		switch(ngrade) {
+		case 1: grade="VIP"; break;
+		case 2: grade="Gold"; break;
+		case 3: grade="Silver"; break;
+		case 4: grade="Normal"; break;
+		}
+
+		try {
+			searchAccById(id);
+			throw new AccountException(BankExpCode.EXIST_ACC);
+		} catch (Exception e) {
+			accs[accCnt++] = new SpecialAccount(id,name,money,grade);
+			System.out.println("결과:특수계좌가 개설되었습니다.");
+		}
+	}
+	public void accsList() throws AccountException {
+		System.out.println("---------------------------");
+		System.out.println("1.일반계좌 | 2.특수계좌 | 3.전체");
+		System.out.println("---------------------------");
+		System.out.print("선택>>");
+		int sel= Integer.parseInt(sc.nextLine());
+		if (sel==1) {
+			System.out.println("--------");
+			System.out.println("계좌목록");
+			System.out.println("--------");
+			for(int i=0; i<accCnt; i++) {
+				if (!(accs[i] instanceof SpecialAccount))
+					System.out.println(accs[i].accInfo());
+			}
+		} else if (sel==2) {
+			System.out.println("--------");
+			System.out.println("계좌목록");
+			System.out.println("--------");
+			for(int i=0; i<accCnt; i++) {
+				if (accs[i] instanceof SpecialAccount)
+					System.out.println(accs[i].accInfo());
+			}
+		} else if (sel==3){
+			System.out.println("--------");
+			System.out.println("계좌목록");
+			System.out.println("--------");
+			for(int i=0; i<accCnt; i++) {
+				System.out.println(accs[i].accInfo());
+			}
+		} else {
+			throw new AccountException(BankExpCode.LIST_MENU);
+		}
+	}
+	private Account searchAccById(String id) throws AccountException {
+		for(int i=0; i<accCnt; i++) {
+			if(accs[i].getId().equals(id)) {
+				return accs[i];
+			}
+		}
+		throw new AccountException(BankExpCode.NOT_ACC);
+	}
+	public void deposit() throws AccountException {
+		System.out.println("--------");
+		System.out.println("입금");
+		System.out.println("--------");
+		System.out.print("계좌번호:");
+		String id = sc.nextLine();
+		System.out.print("예금액:");
+		int money = Integer.parseInt(sc.nextLine());
+		Account acc = searchAccById(id);
+		acc.deposit(money);
+		System.out.println("결과:예금을 성공하였습니다.");
+	}
+	public void withdraw() throws AccountException {
+		System.out.println("--------");
+		System.out.println("출금");
+		System.out.println("--------");
+		System.out.print("계좌번호:");
+		String id = sc.nextLine();
+		System.out.print("출금액:");
+		int money = Integer.parseInt(sc.nextLine());
+		Account acc = searchAccById(id);
+		acc.withdraw(money);
+		System.out.println("결과:출금을 성공하였습니다.");
+	}
+	public void accInfo() throws AccountException {
+		System.out.println("--------");
+		System.out.println("계좌조회");
+		System.out.println("--------");
+		System.out.print("계좌번호:");
+		String id=sc.nextLine();
+		Account acc = searchAccById(id);
+		System.out.println(acc.accInfo());
+		System.out.println("결과:계좌가 조회되었습니다.");
+	}	
+	public int menu() throws AccountException {
+		System.out.println("------------------------------------------------------");
+		System.out.println("1.계좌생성 | 2.계좌조회 | 3.계좌목록 | 4.예금 | 5.출금 | 0.종료");
+		System.out.println("------------------------------------------------------");
+		System.out.print("선택>>");
+		int sel = Integer.parseInt(sc.nextLine());
+		if (sel>=0 && sel<=5) return sel;
+		throw new AccountException(BankExpCode.MAIN_MENU);
+	}
+	public void accMenu() throws AccountException {
+		System.out.println("-------------------");
+		System.out.println("1.일반계좌 | 2.특수계좌");
+		System.out.println("-------------------");
+		System.out.print("선택>>");
+		int sel= Integer.parseInt(sc.nextLine());
+		if(sel==1) {
+			createAccount();
+		} else if (sel==2){
+			createSpecialAccount();
+		} else {
+			throw new AccountException(BankExpCode.ACC_MENU);
+		}
+	}
+	public static void main(String[] args) {
+		Bank bank = new Bank();
+		int sel;
+		while(true) {
 			try {
-				int selectNo = Integer.parseInt(scanner.nextLine());
-				if (selectNo == 1) {
-					System.out.println("------------------");
-					System.out.println("1.일반계좌 | 2.특수계좌");
-					System.out.println("------------------");
-					System.out.print("선택> ");
-					String sel = scanner.nextLine();
-					if (sel.equals("1")) {
-						createAccount();
-					} else if (sel.equals("2")) {
-						createSpecialAccount();
-					} else {
-						System.out.println("후;;");
-					}
-					
-				} else if (selectNo==2) {
-					accountList();
-				} else if (selectNo==3) {
-					deposit();
-				} else if (selectNo==4) {
-					withdraw();
-				} else if (selectNo==5) {
-					run = false;
+				sel = bank.menu();
+				if (sel==0)
+					break;
+				switch(sel) {
+				case 1: bank.accMenu(); break;
+				case 2: bank.accInfo(); break;
+				case 3: bank.accsList(); break;
+				case 4: bank.deposit(); break;
+				case 5: bank.withdraw(); break;
 				}
 			} catch (NumberFormatException e) {
-				System.out.println("숫자만 입력해 주세요.");
+				System.out.println("숫자만 입력이 가능합니다.");
+			} catch (AccountException e) {
+				System.out.println(e.getMessage());
 			}
 			
-//			// switch문으로 처리하는 경우
-//			switch(selectNo) {
-//			case 1: createAccount(); break;
-//			case 2: accountList(); break;
-//			case 3: deposit(); break;
-//			case 4: withdraw(); break;
-//			case 5: run = false; break;
-//			default: System.out.println("다시 입력해 주세요.");
-//			}
 		}
-		System.out.println("프로그램 종료");
-	}
-	
-	// 계좌 생성하기
-	private static void createAccount() {
-		System.out.println("----------");
-		System.out.println("일반계좌 생성");
-		System.out.println("----------");
-
-		System.out.print("계좌번호: ");
-		String ano = scanner.next();
-		System.out.print("계좌주: ");
-		String owner = scanner.next();
-		System.out.print("초기입금액: ");
-		int balance = scanner.nextInt();
-		
-		accountArray[Account.num++] = new Account(ano, owner, balance);
-		System.out.println("결과: 계좌가 생성되었습니다.");
-	}
-	// 스페셜 계좌 생성하기
-	private static void createSpecialAccount() {
-		System.out.println("----------");
-		System.out.println("특수계좌 생성");
-		System.out.println("----------");
-
-		System.out.print("계좌번호: ");
-		String ano = scanner.next();
-		System.out.print("계좌주: ");
-		String owner = scanner.next();
-		System.out.print("초기입금액: ");
-		int balance = scanner.nextInt();
-		scanner.nextLine();
-		System.out.print("등급(VIP:1, Gold:2, Silver:3, Normal:4): ");
-//		String ngrade = scanner.next();
-		int ngrade = Integer.parseInt(scanner.nextLine());
-		String grade = "Normal";
-		switch(ngrade) {
-		case 1: grade = "VIP"; break;
-		case 2: grade = "Gold"; break;
-		case 3: grade = "Silver"; break;
-		case 4: grade = "Normal"; break;
-		}
-		accountArray[Account.num++] = new SpecialAccount(ano, owner, balance, grade);
-		System.out.println("결과: 계좌가 생성되었습니다.");
-	}
-	// 계좌 목록 보기
-	private static void accountList() {
-		System.out.println("--------------------------");
-		System.out.println("1.일반계좌 | 2.특수계좌 | 3.전체");
-		System.out.println("--------------------------");
-		
-		System.out.print("선택> ");
-		String sel = scanner.nextLine();
-		if (sel.equals("1")) {
-			System.out.println("----------");
-			System.out.println("일반계좌 목록");
-			System.out.println("----------");
-			for (int i=0; i<Account.num; i++) {
-				Account ac = accountArray[i];
-				if (!(ac instanceof SpecialAccount)) {					
-					System.out.println(accountArray[i].getAno()+'\t'+accountArray[i].getOwner()+'\t'+accountArray[i].getBalance());
-				}
-			}
-		} else if (sel.equals("2")) {
-			System.out.println("----------");
-			System.out.println("특수계좌 목록");
-			System.out.println("----------");
-			for (int i=0; i<Account.num; i++) {
-				Account ac = accountArray[i];
-				if (ac instanceof SpecialAccount) {					
-					System.out.println(accountArray[i].getAno()+'\t'+accountArray[i].getOwner()+'\t'+accountArray[i].getBalance());
-				}
-			}
-		} else if (sel.equals("3")) {
-			System.out.println("-------");
-			System.out.println("계좌 목록");
-			System.out.println("-------");
-			for (int i=0; i<Account.num; i++) {
-				System.out.println(accountArray[i].getAno()+'\t'+accountArray[i].getOwner()+'\t'+accountArray[i].getBalance());
-			}
-		} else {
-			System.out.println("^^;");
-		}
-		
-	}
-	
-	// 예금하기
-	private static void deposit() {
-		System.out.println("------");
-		System.out.println("예금");
-		System.out.println("------");
-
-		System.out.print("계좌번호: ");
-		String ano = scanner.next();
-		System.out.print("예금액: ");
-		int amount = scanner.nextInt();
-		
-		if (findAccount(ano) != null) {
-			int balance = findAccount(ano).getBalance();
-			findAccount(ano).setBalance(balance+amount);
-			System.out.println("결과: 예금이 성공되었습니다.");
-		} else {
-			System.out.println("해당 계좌는 존재하지 않습니다.");
-		}
-	}
-	
-	// 출금하기
-	private static void withdraw() {
-		System.out.println("------");
-		System.out.println("출금");
-		System.out.println("------");
-
-		System.out.print("계좌번호: ");
-		String ano = scanner.next();
-		System.out.print("출금액: ");
-		int amount = scanner.nextInt();
-		
-		if (findAccount(ano) != null) {
-			int balance = findAccount(ano).getBalance();
-			if (balance >= amount) {
-				findAccount(ano).setBalance(balance-amount);
-				System.out.println("결과: 출금이 성공되었습니다.");			
-			} else {
-				System.out.println("결과: 출금이 실패되었습니다.");			
-			}
-		} else {
-			System.out.println("해당 계좌는 존재하지 않습니다.");
-		}
-	}
-	
-	// Account 배열에서 ano와 동일한 Account 객체 찾기
-	private static Account findAccount(String ano) {
-		Account ac = null;
-		for (int i=0; i<Account.num; i++) {
-			if (accountArray[i].getAno().equals(ano)) {
-				ac = accountArray[i];
-			}
-		}
-		return ac;
 	}
 }

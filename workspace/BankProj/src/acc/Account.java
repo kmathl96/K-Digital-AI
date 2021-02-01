@@ -1,37 +1,29 @@
 package acc;
 
+import exp.AccountException;
+import exp.BankExpCode;
+
 public class Account {
-	String ano;
+	String id;
 	String name;
 	int balance;
-	public static int num;
 	
-	public Account() {
-		ano = "100";
-		name = "none";
-		balance = 0;
+	public Account() {}
+	public Account(String id, String name, int money) {
+		this.id=id;
+		this.name=name;
+		this.balance=money;
 	}
-	public Account(String account_number, String name, int balance) {
-		this.ano = account_number;
-		this.name = name;
-		this.balance = balance;
+	public String getId() {
+		return id;
 	}
-	public Account(String account_number, int balance) {
-		this.ano = account_number;
-		this.name = "none";
-		this.balance = balance;
+	public void setId(String id) {
+		this.id = id;
 	}
-	
-	public String getAno() {
-		return ano;
-	}
-	public void setAno(String account_number) {
-		this.ano = account_number;
-	}
-	public String getOwner() {
+	public String getName() {
 		return name;
 	}
-	public void setOwner(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	public int getBalance() {
@@ -41,19 +33,19 @@ public class Account {
 		this.balance = balance;
 	}
 	
-	public void deposit(int amount) {
-		if (amount>0) {
-			balance += amount;
-		}
+	public boolean deposit(int money) throws AccountException {
+		if(money<=0)
+			throw new AccountException(BankExpCode.DEPOSIT);
+		balance+=money;
+		return true;
 	}
-	public void withdraw(int amount) {
-		if (balance >= amount) {			
-			balance -= amount;
-		} else {
-			System.out.println("잔액 부족");
-		}
-	}
-	public String info() {
-		return "계좌번호:"+ano+", 이름:"+name+", 잔액:"+balance; 
+	public boolean withdraw(int money) throws AccountException {
+		if (balance<money)
+			throw new AccountException(BankExpCode.WITHDRAW);
+		balance-=money;
+		return true;
+	}	
+	public String accInfo() {
+		return "계좌번호:"+id+", 이름:"+name+", 잔액:"+balance;
 	}
 }
