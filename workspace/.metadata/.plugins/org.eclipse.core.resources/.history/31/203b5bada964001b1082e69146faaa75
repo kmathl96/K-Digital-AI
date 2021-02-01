@@ -1,0 +1,5 @@
+package prob7;
+
+public class WrongPasswordException extends Exception {
+
+}
