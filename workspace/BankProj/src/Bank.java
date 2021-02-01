@@ -14,35 +14,34 @@ public class Bank {
 			System.out.println("1.계좌생성 | 2.계좌목록 | 3.예금 | 4.출금 | 5.종료");
 			System.out.println("------------------------------------------");
 			System.out.print("선택> ");
-			
-			// 1~5가 아닌 숫자나 다른 문자열이 들어오는 경우를 처리하기 위해 nextLine()으로 입력 받음
-			String selectNo = scanner.nextLine();
-			
-			if (selectNo.equals("1")) {
-
-				System.out.println("------------------");
-				System.out.println("1.일반계좌 | 2.특수계좌");
-				System.out.println("------------------");
-				System.out.print("선택> ");
-				String sel = scanner.nextLine();
-				if (sel.equals("1")) {
-					createAccount();
-				} else if (sel.equals("2")) {
-					createSpecialAccount();
-				} else {
-					System.out.println("후;;");
+		
+			try {
+				int selectNo = Integer.parseInt(scanner.nextLine());
+				if (selectNo == 1) {
+					System.out.println("------------------");
+					System.out.println("1.일반계좌 | 2.특수계좌");
+					System.out.println("------------------");
+					System.out.print("선택> ");
+					String sel = scanner.nextLine();
+					if (sel.equals("1")) {
+						createAccount();
+					} else if (sel.equals("2")) {
+						createSpecialAccount();
+					} else {
+						System.out.println("후;;");
+					}
+					
+				} else if (selectNo==2) {
+					accountList();
+				} else if (selectNo==3) {
+					deposit();
+				} else if (selectNo==4) {
+					withdraw();
+				} else if (selectNo==5) {
+					run = false;
 				}
-				
-			} else if (selectNo.equals("2")) {
-				accountList();
-			} else if (selectNo.equals("3")) {
-				deposit();
-			} else if (selectNo.equals("4")) {
-				withdraw();
-			} else if (selectNo.equals("5")) {
-				run = false;
-			} else { // 1~5가 아닌 문자열인 경우
-				System.out.println("다시 입력해 주세요.");
+			} catch (NumberFormatException e) {
+				System.out.println("숫자만 입력해 주세요.");
 			}
 			
 //			// switch문으로 처리하는 경우
