@@ -1,0 +1,11 @@
+workspace/.metadata
+workspace/bin/
+workspace/tmp/
+workspace/*.tmp
+workspace/*.bak
+workspace/*.swp
+workspace/*~.nib
+workspace/local.properties
+workspace/.settings/
+workspace/.loadpath
+workspace/.recommenders
