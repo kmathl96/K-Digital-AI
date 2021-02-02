@@ -1,6 +1,0 @@
-package shapes;
-
-public interface Shape {
-	String color="";
-	void draw();
-}

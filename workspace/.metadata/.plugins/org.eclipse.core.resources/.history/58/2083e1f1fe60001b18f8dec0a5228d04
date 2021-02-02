@@ -1,7 +1,0 @@
-package emp;
-
-public class Employee {
-	String num;
-	String name;
-	int pay;
-}

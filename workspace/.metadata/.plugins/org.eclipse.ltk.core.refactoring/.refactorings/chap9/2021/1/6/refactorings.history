@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Move 2 elements to &apos;chap9/src/problem4&apos;&#x0D;&#x0A;- Original project: &apos;chap9&apos;&#x0D;&#x0A;- Destination element: &apos;chap9/src/problem4&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     problems.NestedClassExample.java&#x0D;&#x0A;     problems.Car.java&#x0D;&#x0A;- Update references to refactored element" description="Move compilation units" destination="/src&lt;problem4" element1="/src&lt;problems{NestedClassExample.java" element2="/src&lt;problems{Car.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1612103319836" units="2" version="1.0"/>
-</session>
