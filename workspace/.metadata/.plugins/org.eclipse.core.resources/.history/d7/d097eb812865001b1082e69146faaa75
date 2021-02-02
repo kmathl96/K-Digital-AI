@@ -1,0 +1,15 @@
+package sec05;
+
+import java.util.HashMap;
+
+public class HashMapExample {
+
+	public static void main(String[] args) {
+		HashMap<Integer, String> hm = new HashMap<Integer, String>();
+		hm.put(100, "hong");
+		hm.put(101, "park");
+		hm.put(103, "lee");
+		
+		System.out.println(hm.get(103));
+	}
+}

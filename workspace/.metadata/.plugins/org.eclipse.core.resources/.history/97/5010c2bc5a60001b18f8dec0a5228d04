@@ -1,0 +1,13 @@
+package chap6;
+
+public class Person {
+	int age;
+	String name;
+	public Person() {
+		System.out.println("생성");
+	}
+	
+	public String info() {
+		return "이름: "+name+", 나이: "+age;
+	}
+}

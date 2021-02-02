@@ -1,0 +1,15 @@
+class Person {
+	int age;
+	String name;
+	public String info() {
+		return "이름:"+name+", 나이:"+age;
+	}
+}
+public class InheritSample1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;MessageBeanKr&apos; to &apos;MessageBean_kr&apos;&#x0D;&#x0A;- Original project: &apos;chap8&apos;&#x0D;&#x0A;- Original element: &apos;MessageBeanKr&apos;&#x0D;&#x0A;- Renamed element: &apos;MessageBean_kr&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;MessageBeanKr&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;{MessageBeanKr.java[MessageBeanKr" matchStrategy="1" name="MessageBean_kr" qualified="false" references="true" similarDeclarations="false" stamp="1611887574004" textual="false" version="1.0"/>
+</session>

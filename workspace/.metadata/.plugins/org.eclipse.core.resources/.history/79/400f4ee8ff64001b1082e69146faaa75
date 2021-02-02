@@ -1,0 +1,5 @@
+package sec06.exam06_stop;
+
+public class PrintThread extends Thread {
+
+}

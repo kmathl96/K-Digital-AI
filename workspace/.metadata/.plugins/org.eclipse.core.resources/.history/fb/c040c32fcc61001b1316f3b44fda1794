@@ -1,0 +1,33 @@
+import emp.Employee;
+
+public class Company {
+	Employee[] emps = new Employee[100];
+	static int empCnt;
+	
+	public static void main(String[] args) {
+		Company com = new Company();
+		com.addEmployee(new Employee("101","김과장"));
+		com.addEmployee(new Employee("102","박대리"));
+		com.addEmployee(new Employee("103","홍차장"));
+		
+		com.empList();
+		System.out.println();
+		System.out.println("총 급여액:"+com.getTotEmpPay());
+	}
+	
+	public void addEmployee(Employee emp) {
+		emps[empCnt++] = emp;
+	}
+	public void empList() {
+		for (int i=0; i<Company.empCnt; i++) {
+			System.out.println("사번:"+emps[i].getNum()+", 이름:"+emps[i].getName()+", 급여:"+emps[i].getPay());
+		}
+	}
+	public int getTotEmpPay() {
+		int sum = 0;
+		for (int i=0; i<Company.empCnt; i++) {
+			sum += emps[i].getPay();
+		}
+		return sum;
+	}
+}

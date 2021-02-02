@@ -1,0 +1,20 @@
+package emp;
+
+public class Sales extends Permanent {
+	int insentive;
+
+	public Sales(String id, String name, int pay, int insentive) {
+		super(id, name, pay);
+		this.insentive = insentive;
+	}
+
+	@Override
+	public int getPay() {
+		return super.getPay()+insentive;
+	}
+
+	@Override
+	public String info() {
+		return super.info();
+	}
+}

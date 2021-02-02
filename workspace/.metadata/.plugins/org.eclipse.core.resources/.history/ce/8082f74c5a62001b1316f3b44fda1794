@@ -1,0 +1,13 @@
+package problems;
+
+public class Anonymous {
+	Vehicle field = null;
+	void method1() {
+		Vehicle localVar = null;
+		localVar.run();
+	}
+	
+	void method2(Vehicle v) {
+		v.run();
+	}
+}

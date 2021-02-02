@@ -1,0 +1,22 @@
+package chap6;
+
+class Card {
+	String shape;
+	String num;
+	static int width = 20;
+	static int height = 30;
+	
+	public Carㅇ(String shape, String num) {
+		this.shape = shape;
+		this.num = num;
+	}
+}
+
+public class CardTest {
+	public static void main(String[] args) {
+		Card c1 = new Card("하트", "A");
+		Card c2 = new Card("다이아몬드", "5");
+		Card c3 = new Card("클로버", "7");
+//		Card c1 = new Card("스페이드", "A");
+	}
+}

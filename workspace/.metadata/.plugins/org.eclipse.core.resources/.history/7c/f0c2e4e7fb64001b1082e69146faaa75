@@ -1,0 +1,10 @@
+package sec06.exam04_wait_notify;
+
+public class WaitNotifyExample {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

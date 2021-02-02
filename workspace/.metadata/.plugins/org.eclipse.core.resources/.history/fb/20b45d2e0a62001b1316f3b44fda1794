@@ -1,0 +1,18 @@
+package shapes;
+
+public class Rectangle extends Shape {
+	public String color;
+	int width;
+	int height;
+
+	public Rectangle(String color, int x, int y) {
+		this.color = color;
+		this.width = x;
+		this.height = y;
+	}
+
+	@Override
+	public void draw() {
+		System.out.println("[Rectangle-color:"+color+",width:"+width+",height:"+height+"]");
+	}
+}

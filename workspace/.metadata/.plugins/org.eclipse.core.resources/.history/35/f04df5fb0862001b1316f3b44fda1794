@@ -1,0 +1,6 @@
+package shapes;
+
+public abstract Shape {
+	String color;
+	void draw();
+}

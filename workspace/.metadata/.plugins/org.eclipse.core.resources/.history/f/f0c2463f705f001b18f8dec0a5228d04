@@ -1,0 +1,17 @@
+package chap4;
+
+public class IfExample {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int score = 85;
+		if (score >= 90) {
+			System.out.println('A');
+		}
+		if (score < 90) {
+			System.out.println('B');
+		}
+		System.out.println("Á¾·á");
+	}
+
+}

@@ -1,0 +1,17 @@
+interface IBase {
+	void method();
+}
+public class AnonymousTest {
+
+	public static void main(String[] args) {
+		IBase b = new IBase() { // IBase를 상속 받아 클래스를 정의하여 생성함
+			
+			@Override
+			public void method() {
+				System.out.println("구현 메소드");
+			}
+		};
+		b.method();
+	}
+
+}

@@ -1,0 +1,13 @@
+class Button {
+	public void click() {
+		System.out.println("´­·¯Áü");
+	}
+}
+public class InterfaceSample2 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
