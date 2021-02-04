@@ -1,7 +1,0 @@
-package sec01;
-
-import sec01.access.Access;
-
-public class ChildAccess extends Access {
-
-}

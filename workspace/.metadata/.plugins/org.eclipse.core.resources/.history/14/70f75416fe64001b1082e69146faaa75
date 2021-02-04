@@ -1,9 +1,0 @@
-package sec06.exam05_wait_notify;
-
-public class CunsumerThread extends Thread {
-	DataBox dataBox;
-
-	public CunsumerThread(DataBox dataBox) {
-		this.dataBox = dataBox;
-	}
-}

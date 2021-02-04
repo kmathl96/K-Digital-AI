@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename type &apos;sec06.exam05_wait_notify.CunsumerThread&apos; to &apos;ConsumerThread&apos;&#x0D;&#x0A;- Original project: &apos;chap12&apos;&#x0D;&#x0A;- Original element: &apos;sec06.exam05_wait_notify.CunsumerThread&apos;&#x0D;&#x0A;- Renamed element: &apos;sec06.exam05_wait_notify.ConsumerThread&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;CunsumerThread&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;sec06.exam05_wait_notify{CunsumerThread.java[CunsumerThread" matchStrategy="1" name="ConsumerThread" qualified="false" references="true" similarDeclarations="false" stamp="1612232802421" textual="false" version="1.0"/>
-</session>

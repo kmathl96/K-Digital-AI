@@ -1,8 +1,0 @@
-package sec01;
-
-public class AccessTest {
-
-	public static void main(String[] args) {
-//		Access ac = new Access(); // ¤§¤©
-	}
-}

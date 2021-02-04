@@ -1,8 +1,0 @@
-package sec01.access;
-
-class Access {
-	private int pv;
-	int dv;
-	protected int rv;
-	public int uv;
-}

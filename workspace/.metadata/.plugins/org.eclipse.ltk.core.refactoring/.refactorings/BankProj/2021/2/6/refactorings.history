@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;SpecialAccount.java&apos; to &apos;chap15/src/sec05&apos;&#x0D;&#x0A;- Original project: &apos;BankProj&apos;&#x0D;&#x0A;- Destination element: &apos;chap15/src/sec05&apos;&#x0D;&#x0A;- Original element: &apos;acc.SpecialAccount.java&apos;" description="Copy compilation unit" destination="=chap15/src&lt;sec05" element1="/src&lt;acc{SpecialAccount.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1612281640441" units="1" version="1.0"/>
-</session>
