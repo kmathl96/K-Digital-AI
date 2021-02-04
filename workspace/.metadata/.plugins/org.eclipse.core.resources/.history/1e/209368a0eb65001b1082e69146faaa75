@@ -1,0 +1,10 @@
+package sec01;
+
+import sec01.access.Access;
+
+public class ChildAccess extends Access {
+	public void method() {
+//		pv = 10; // private 변수는 자식도 접근 불가
+		
+	}
+}

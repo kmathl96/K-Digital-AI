@@ -1,0 +1,56 @@
+package sec01;
+
+class Person {
+	int age;
+	String name;
+	
+	public Person() {
+	}
+	public Person(int age, String name) {
+		super();
+		this.age = age;
+		this.name = name;
+	}
+	
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Person [age=" + age + ", name=" + name + "]";
+	}
+}
+
+class Student extends Person {
+	String major;
+	public Student() {
+	}
+	public Student(int age, String name, String major) {
+		super(age, name);
+		this.major = major;
+	}
+	
+	public String getMajor() {
+		return major;
+	}
+	public void setMajor(String major) {
+		this.major = major;
+	}
+}
+
+public class PolynoTest {
+
+	public static void main(String[] args) {
+		Student s1 = new Student("박나래",33,"방송연예");
+		System.out.println(s1);
+	}
+}

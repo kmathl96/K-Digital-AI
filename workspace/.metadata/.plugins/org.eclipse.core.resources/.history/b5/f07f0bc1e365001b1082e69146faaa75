@@ -1,0 +1,17 @@
+package sec01.val;
+
+class Point {
+	int x, y;
+	String getLocation() {
+		return "x:"+x+", y:"+y;
+	}
+}
+
+public class OverrideTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

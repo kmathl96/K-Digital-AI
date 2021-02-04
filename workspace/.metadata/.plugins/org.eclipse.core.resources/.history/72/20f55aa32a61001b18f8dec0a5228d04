@@ -1,0 +1,6 @@
+package chap7;
+
+public class InheritSample1 {
+	public static void main(String[] args) {
+	}
+}

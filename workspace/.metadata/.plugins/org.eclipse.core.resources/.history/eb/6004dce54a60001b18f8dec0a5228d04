@@ -1,0 +1,15 @@
+package chap6;
+
+public class Account_ex {
+
+	public static void main(String[] args) {
+		Account ac = new Account();
+		ac.balance = 10000;
+		ac.deposit(2000);
+		System.out.println(ac.balance);
+		ac.withdraw(7000);
+		System.out.println(ac.balance);
+		ac.withdraw(6000);
+		System.out.println(ac.balance);
+	}
+}

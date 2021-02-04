@@ -1,0 +1,16 @@
+package sec01.val;
+
+class SingleTon {
+	private static SingleTon instance = new SingleTon(); // static 함수에선 static 변수만 접근 할 수 있으므로 static으로 선언
+	public static SingleTon getInstance() { // 다른 패키지에서도, 객체 생성 없이 쓰려면 public
+		return instance;
+	}
+	private SingleTon() {};
+}
+
+public class SingleTonTest {
+
+	public static void main(String[] args) {
+		SingleTon t = SingleTon.getInstance();
+	}
+}

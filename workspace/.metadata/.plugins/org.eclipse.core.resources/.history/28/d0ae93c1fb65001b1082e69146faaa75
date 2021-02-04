@@ -1,0 +1,28 @@
+package sec01.inter;
+
+interface Movable {
+	void move(int x, int y);
+}
+
+interface Attackable {
+	void attack();
+}
+
+class Fighter implements Movable, Attackable {
+
+	@Override
+	public void attack() {
+	}
+
+	@Override
+	public void move(int x, int y) {
+	}
+	
+}
+
+public class InterfaceTest {
+
+	public static void main(String[] args) {
+		Attackable f1 = new Fighter();
+	}
+}

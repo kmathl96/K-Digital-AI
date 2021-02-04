@@ -1,0 +1,5 @@
+package sec06.exam05_wait_notify;
+
+public class CunsumerThread extends Thread {
+
+}

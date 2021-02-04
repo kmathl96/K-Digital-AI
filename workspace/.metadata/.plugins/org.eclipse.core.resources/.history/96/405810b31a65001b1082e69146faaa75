@@ -1,0 +1,13 @@
+package sec02;
+
+import java.util.ArrayList;
+
+public class ArrayListExample {
+
+	public static void main(String[] args) {
+		ArrayList<String> list = new ArrayList<String>(); // Á¦³Ê¸¯
+		list.add("hong");
+		String str = list.get(0);
+		System.out.println(str);
+	}
+}

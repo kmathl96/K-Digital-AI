@@ -1,0 +1,17 @@
+class A {
+	class B {
+		B() {} // 생성자
+		int n; // 인스턴스 필드
+		void method() {} // 인스턴스 메소드
+//		static int sn; // static 필드 선언 불가능
+//		static void smethod() {}; // static 메소드 선언 불가능
+	}
+}
+public class InnerClassTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,9 @@
+package chap6;
+
+public class Account_ex {
+
+	public static void main(String[] args) {
+		Account ac = new Account();
+		ac.balance = 10000;
+	}
+}

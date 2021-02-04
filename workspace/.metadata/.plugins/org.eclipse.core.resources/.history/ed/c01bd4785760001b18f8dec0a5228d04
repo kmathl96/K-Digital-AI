@@ -1,0 +1,38 @@
+package chap6;
+
+class Account {
+	String account_number;
+	String name;
+	int balance;
+	
+	public void deposit(int amount) {
+		if (amount>0) {
+			balance += amount;
+		}
+	}
+	public void withdraw(int amount) {
+		if (balance >= amount) {			
+			balance -= amount;
+		} else {
+			System.out.println("ÀÜ¾× ºÎÁ·");
+		}
+	}
+	public String info() {
+		return "°èÁÂ¹øÈ£:"+account_number+", ÀÌ¸§:"+name+", ÀÜ¾×:"+balance; 
+	}
+}
+
+public class AccountTest {
+	public static void main(String[] args) {
+		Account ac1 = new Account();
+		Account ac2 = new Account();
+		ac1.account_number = "101";
+		ac1.name = "È«±æµ¿";
+		ac1.balance = 100000;
+		ac2.account_number = "102";
+		ac2.name = "±è±æµ¿";
+		ac2.balance = 200000;
+		System.out.println(ac1.info());
+		System.out.println(ac2.info());
+	}
+}

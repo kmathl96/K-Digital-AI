@@ -1,0 +1,31 @@
+package sec01.val;
+
+class InitTest {
+	int iv=1;
+	static int sv = 10;
+	static int[] sarr = new int[10];
+	
+	{ // instance 초기화 block
+		System.out.println(iv); // 1
+		iv = 2;
+		System.out.println(iv); // 2
+	}
+	static { // static 초기화 block
+		// 객체 생성보다 먼저 됨 => 10 20이 먼저 출력됨
+		System.out.println(sv);
+		sv = 20;
+		System.out.println(sv);
+	}
+	InitTest() {
+		iv = 3;
+		System.out.println(iv); // 3
+	}
+}
+
+public class InitBlockTest {
+
+	public static void main(String[] args) {
+		InitTest it1 = new InitTest();
+		InitTest it2 = new InitTest();
+	}
+}

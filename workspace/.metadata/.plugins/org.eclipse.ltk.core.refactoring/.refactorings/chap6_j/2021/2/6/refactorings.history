@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;sec01.access.AccessClass.java&apos; to &apos;Access.java&apos;&#x0D;&#x0A;- Original project: &apos;chap6_j&apos;&#x0D;&#x0A;- Original element: &apos;sec01.access.AccessClass.java&apos;&#x0D;&#x0A;- Renamed element: &apos;sec01.access.Access.java&apos;" description="Rename compilation unit &apos;AccessClass.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;sec01.access{AccessClass.java" name="Access.java" references="false" stamp="1612334668185" version="1.0"/>
+</session>
