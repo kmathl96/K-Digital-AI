@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Scanner;
 
 import acc.Account;
@@ -7,12 +8,8 @@ import exp.BankExpCode;
 
 public class Bank {
 	Scanner sc = new Scanner(System.in);
-	Account[] accs = new Account[100];
-	int accCnt;
+	HashMap<String, Account> accs = new HashMap<>();
 	
-	public int getAccCnt() {
-		return accCnt;
-	}
 	public void createAccount() throws AccountException {
 		System.out.println("--------");
 		System.out.println("일반계좌생성");
@@ -23,16 +20,11 @@ public class Bank {
 		String name = sc.nextLine();
 		System.out.print("초기입금액:");
 		int money = Integer.parseInt(sc.nextLine());
-		
-		try {
-			searchAccById(id);
+		if (accs.containsKey(id)) {
 			throw new AccountException(BankExpCode.EXIST_ACC);
-		} catch (AccountException e) {
-			if (e.getErrCode()==BankExpCode.EXIST_ACC)
-				throw e;
-			accs[accCnt++] = new Account(id,name,money);
-			System.out.println("결과:일반계좌가 개설되었습니다.");
-		}		
+		}	
+		accs.put(id,new Account(id,name,money));
+		System.out.println("결과:일반계좌가 개설되었습니다.");
 	}
 	public void createSpecialAccount() throws AccountException {
 		System.out.println("--------");
@@ -53,14 +45,11 @@ public class Bank {
 		case 3: grade="Silver"; break;
 		case 4: grade="Normal"; break;
 		}
-
-		try {
-			searchAccById(id);
+		if (accs.containsKey(id)) {
 			throw new AccountException(BankExpCode.EXIST_ACC);
-		} catch (Exception e) {
-			accs[accCnt++] = new SpecialAccount(id,name,money,grade);
-			System.out.println("결과:특수계좌가 개설되었습니다.");
-		}
+		}	
+		accs.put(id,new SpecialAccount(id,name,money,grade));
+		System.out.println("결과:특수계좌가 개설되었습니다.");
 	}
 	public void accsList() throws AccountException {
 		System.out.println("---------------------------");
@@ -70,39 +59,32 @@ public class Bank {
 		int sel= Integer.parseInt(sc.nextLine());
 		if (sel==1) {
 			System.out.println("--------");
-			System.out.println("계좌목록");
+			System.out.println("일반계좌목록");
 			System.out.println("--------");
-			for(int i=0; i<accCnt; i++) {
-				if (!(accs[i] instanceof SpecialAccount))
-					System.out.println(accs[i].accInfo());
+			for(Account acc : accs.values()) {
+				if (!(acc instanceof SpecialAccount))
+					System.out.println(acc.accInfo());
 			}
 		} else if (sel==2) {
 			System.out.println("--------");
-			System.out.println("계좌목록");
+			System.out.println("특수계좌목록");
 			System.out.println("--------");
-			for(int i=0; i<accCnt; i++) {
-				if (accs[i] instanceof SpecialAccount)
-					System.out.println(accs[i].accInfo());
+			for(Account acc : accs.values()) {
+				if (acc instanceof SpecialAccount)
+					System.out.println(acc.accInfo());
 			}
 		} else if (sel==3){
 			System.out.println("--------");
-			System.out.println("계좌목록");
+			System.out.println("전체계좌목록");
 			System.out.println("--------");
-			for(int i=0; i<accCnt; i++) {
-				System.out.println(accs[i].accInfo());
+			for(Account acc : accs.values()) {
+				System.out.println(acc.accInfo());
 			}
 		} else {
 			throw new AccountException(BankExpCode.LIST_MENU);
 		}
 	}
-	private Account searchAccById(String id) throws AccountException {
-		for(int i=0; i<accCnt; i++) {
-			if(accs[i].getId().equals(id)) {
-				return accs[i];
-			}
-		}
-		throw new AccountException(BankExpCode.NOT_ACC);
-	}
+	
 	public void deposit() throws AccountException {
 		System.out.println("--------");
 		System.out.println("입금");
@@ -111,7 +93,10 @@ public class Bank {
 		String id = sc.nextLine();
 		System.out.print("예금액:");
 		int money = Integer.parseInt(sc.nextLine());
-		Account acc = searchAccById(id);
+		if (!accs.containsKey(id)) {
+			throw new AccountException(BankExpCode.NOT_ACC);
+		}
+		Account acc = accs.get(id);
 		acc.deposit(money);
 		System.out.println("결과:예금을 성공하였습니다.");
 	}
@@ -123,7 +108,10 @@ public class Bank {
 		String id = sc.nextLine();
 		System.out.print("출금액:");
 		int money = Integer.parseInt(sc.nextLine());
-		Account acc = searchAccById(id);
+		if (!accs.containsKey(id)) {
+			throw new AccountException(BankExpCode.NOT_ACC);
+		}
+		Account acc = accs.get(id);
 		acc.withdraw(money);
 		System.out.println("결과:출금을 성공하였습니다.");
 	}
@@ -133,7 +121,10 @@ public class Bank {
 		System.out.println("--------");
 		System.out.print("계좌번호:");
 		String id=sc.nextLine();
-		Account acc = searchAccById(id);
+		if (!accs.containsKey(id)) {
+			throw new AccountException(BankExpCode.NOT_ACC);
+		}
+		Account acc = accs.get(id);
 		System.out.println(acc.accInfo());
 		System.out.println("결과:계좌가 조회되었습니다.");
 	}	
