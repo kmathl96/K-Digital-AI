@@ -1,9 +1,11 @@
 package acc;
 
+import java.io.Serializable;
+
 import exp.AccountException;
 import exp.BankExpCode;
 
-public class Account {
+public class Account implements Serializable {
 	String id;
 	String name;
 	int balance;

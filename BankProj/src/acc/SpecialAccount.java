@@ -1,5 +1,7 @@
 package acc;
 
+import java.io.Serializable;
+
 import exp.AccountException;
 
 /* SpecialAccount
@@ -7,7 +9,7 @@ import exp.AccountException;
  * 설명: 등급별 입금시마다 입금액을 추가한다.(VIP:0.04,Gold:0.03,Silver:0.01,Normal:0.01)
  *      즉, 등급이 VIP일 경우 10000원 입금시 10400월 입금된다.
  */
-public class SpecialAccount extends Account {
+public class SpecialAccount extends Account implements Serializable {
 	String grade;
 
 	public String getGrade() {

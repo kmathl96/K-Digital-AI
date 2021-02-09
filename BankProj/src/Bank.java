@@ -1,3 +1,14 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -151,14 +162,162 @@ public class Bank {
 			throw new AccountException(BankExpCode.ACC_MENU);
 		}
 	}
+	
+	public void writeAccs() {
+		// °èÁÂ ¼ö
+		// °¢ °èÁÂÀÇ Æ¯¼ö°èÁÂ ¿©ºÎ,°èÁÂ¹øÈ£,ÀÌ¸§,ÀÜ¾×,(µî±Þ)
+		FileOutputStream fos = null;
+		DataOutputStream dos = null;
+		try {
+			fos = new FileOutputStream("accs.dat");
+			dos = new DataOutputStream(fos);
+			dos.writeInt(accs.size()); // °èÁÂ ¼ö
+			for (Account acc : accs.values()) {
+				if (acc instanceof SpecialAccount) {
+					dos.writeChar('S'); // Æ¯¼ö°èÁÂ
+					dos.writeUTF(((SpecialAccount) acc).getGrade()); // µî±Þ
+				} else {
+					dos.writeChar('N'); // ÀÏ¹Ý°èÁÂ
+				}
+				dos.writeUTF(acc.getId()); // °èÁÂ¹øÈ£
+				dos.writeUTF(acc.getName()); // ÀÌ¸§
+				dos.writeInt(acc.getBalance()); // ÀÜ¾×
+			}
+		} catch (IOException e) {
+		} finally {
+			try {
+				if (dos!=null) dos.close();
+			} catch (IOException e) {}
+		}
+	}
+	public void readAccs() {
+		FileInputStream fis = null;
+		DataInputStream dis = null;
+		int cnt, balance;
+		char sect;
+		String id, name, grade=null;
+		Account acc;
+		try {
+			fis = new FileInputStream("accs.dat");
+			dis = new DataInputStream(fis);
+			cnt = dis.readInt(); // °èÁÂ ¼ö
+			for (int i=0; i<cnt; i++) {
+				sect = dis.readChar(); // °èÁÂ±¸ºÐ(Æ¯¼ö°èÁÂ/ÀÏ¹Ý°èÁÂ)
+				if (sect=='S') grade = dis.readUTF(); // µî±Þ
+				id = dis.readUTF(); // °èÁÂ¹øÈ£
+				name = dis.readUTF(); // ÀÌ¸§
+				balance = dis.readInt(); // ÀÜ¾×
+				if (sect=='S') {
+					acc = new SpecialAccount(id,name,balance,grade);
+				} else {
+					acc = new Account(id,name,balance);
+				}
+				accs.put(id, acc);
+			}
+		} catch (IOException e) {
+		} finally {
+			try {
+				if (dis!=null) dis.close();
+			} catch (IOException e) {}
+		}
+	}
+	public void writeAccs_t() {
+		FileWriter fw = null;
+		BufferedWriter bw = null;
+		try {
+			fw = new FileWriter("accs.txt");
+			bw = new BufferedWriter(fw);
+			for (Account acc : accs.values()) {
+				String info = "";
+				info += acc.getId()+"#"+acc.getName()+"#"+acc.getBalance();
+				if (acc instanceof SpecialAccount) {
+					info += "#"+((SpecialAccount)acc).getGrade();
+				}
+				bw.write(info);
+				bw.newLine();
+				bw.close();
+			}
+		} catch (IOException e) {
+		} finally {
+			try {
+				if (bw!=null) bw.close();
+			} catch (IOException e) {}
+		}
+	}
+	public void readAccs_t() {
+		FileReader fr = null;
+		BufferedReader br = null;
+		String info,id,name,grade;
+		int balance;
+		try {
+			fr = new FileReader("accs.txt");
+			br = new BufferedReader(fr);
+			while ((info=br.readLine())!=null) {
+				String[] its = info.split("#");
+				id = its[0];
+				name = its[1];
+				balance = Integer.parseInt(its[2]);
+				if (its.length==4) {
+					grade = its[3];
+					accs.put(id, new SpecialAccount(id,name,balance,grade));
+				} else {
+					accs.put(id, new Account(id,name,balance));
+				}
+			}
+		} catch (IOException e) {
+		} finally {
+			try {
+				if (br!=null) br.close();
+			} catch (IOException e) {}
+		}
+	}
+	public void writeAccs_s() {
+		FileOutputStream fos = null;
+		ObjectOutputStream oos = null;
+		try {
+			fos = new FileOutputStream("accs.ser");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(accs);
+		} catch (IOException e) {
+		} finally {
+			try {
+				if (oos!=null) oos.close();
+			} catch (IOException e) {
+			}
+		}
+	}
+	public void readAccs_s() {
+		FileInputStream fis = null;
+		ObjectInputStream ois = null;
+		try {
+			fis = new FileInputStream("accs.ser");
+			ois = new ObjectInputStream(fis);
+			accs = (HashMap<String, Account>)(ois.readObject());
+		} catch (IOException e) {
+		} catch (ClassNotFoundException e) {
+		} finally {
+			try {
+				if (ois!=null) ois.close();
+			} catch (IOException e) {
+			}
+		}
+	}
+	
 	public static void main(String[] args) {
 		Bank bank = new Bank();
+//		bank.readAccs();
+//		bank.readAccs_t();
+		bank.readAccs_s();
 		int sel;
 		while(true) {
 			try {
 				sel = bank.menu();
-				if (sel==0)
+				if (sel==0) {
+//					bank.writeAccs();
+//					bank.writeAccs_t();
+					bank.writeAccs_s();
 					break;
+				}
 				switch(sel) {
 				case 1: bank.accMenu(); break;
 				case 2: bank.accInfo(); break;
@@ -171,7 +330,6 @@ public class Bank {
 			} catch (AccountException e) {
 				System.out.println(e.getMessage());
 			}
-			
 		}
 	}
 }
