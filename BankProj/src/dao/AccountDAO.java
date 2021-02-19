@@ -8,8 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import dto.Account;
-import dto.SpecialAccount;
+import acc.Account;
+import acc.SpecialAccount;
+import exp.AccountException;
+import exp.BankExpCode;
 
 public class AccountDAO {
 	Connection conn;
@@ -180,35 +182,26 @@ public class AccountDAO {
 		}
 		return accs;
 	}
-	public boolean depositAccount(String id, int money) {
+	public boolean depositAccount(String id, int money) throws AccountException {
 		Account acc = queryAccount(id);
 		if (acc==null) {
 			System.out.println("계좌가 존재하지 않습니다.");
 			return false;
 		}
-		boolean success = acc.deposit(money);
-		if (success==false) {
-			System.out.println("입금액이 틀립니다.");
-			return false;
-		}
+		acc.deposit(money); // 문제가 생기면 자동으로 예외 처리
 		int rcnt = updateAccount(acc);
 		if (rcnt > 0) return true;
-		else return false;
+		return false;
 	}
-	public boolean withdrawAccount(String id, int money) {
+	public boolean withdrawAccount(String id, int money) throws AccountException {
 		Account acc = queryAccount(id);
 		if (acc==null) {
-			System.out.println("계좌가 존재하지 않습니다.");
-			return false;
+			throw new AccountException(BankExpCode.NOT_ACC);
 		}
-		boolean success = acc.withdraw(money);
-		if (success==false) {
-			System.out.println("출금액이 틀립니다.");
-			return false;
-		}
+		acc.withdraw(money);
 		int rcnt = updateAccount(acc);
 		if (rcnt > 0) return true;
-		else return false;
+		return false;
 	}
 	
 	public int updateAccount(Account acc) {
@@ -230,30 +223,5 @@ public class AccountDAO {
 			}
 		}
 		return rcnt;
-	}
-	public boolean transferAccount(String sid, String rid, int money) {
-		try {
-			conn.setAutoCommit(false); // 자동 커밋하지 않도록
-			boolean success = withdrawAccount(sid, money);
-			if (success==false) {
-				conn.rollback();
-				return false;
-			}
-			success = depositAccount(rid, money);
-			if (success==false) {
-				conn.rollback();
-				return false;
-			}
-			conn.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				conn.setAutoCommit(true); // 다시 변경
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return true;
 	}
 }

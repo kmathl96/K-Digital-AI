@@ -7,6 +7,8 @@
 - 그외 : 강사님과 따로 실습하는 프로젝트
   - BankProj : 은행 계좌 개설, 입금/출금 등
   - CompanyProj : 직원 급여 관리 등
+  - EmpDBProj : 직원 관리
+  - JDBCTest, JDBCProj : DB 연결
   - LottoProj : 로또 번호 추첨
   - ShapeProj : 도형 생성
 

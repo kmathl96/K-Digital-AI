@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import dto.Account;
 import dto.SpecialAccount;
 
@@ -16,13 +18,53 @@ public class AccountTest {
 		dao.connectClose();
 		System.out.println(acc.accInfo());
 	}
+	public static void queryAllAccounts() {
+		AccountDAO dao = new AccountDAO();
+		List<Account> list = dao.queryAllAccounts();
+		dao.connectClose();
+		for (Account acc : list) {
+			System.out.println(acc.accInfo());
+		}
+	}
+	public static void queryAccounts() {
+		AccountDAO dao = new AccountDAO();
+		List<Account> list = dao.queryAccounts();
+		dao.connectClose();
+		for (Account acc : list) {
+			System.out.println(acc.accInfo());
+		}
+	}
+	public static void querySpecialAccounts() {
+		AccountDAO dao = new AccountDAO();
+		List<SpecialAccount> list = dao.querySpecialAccounts();
+		dao.connectClose();
+		for (Account acc : list) {
+			System.out.println(acc.accInfo());
+		}
+	}
 	public static void depositAccount() {
 		AccountDAO dao = new AccountDAO();
 		dao.depositAccount("1001", 1000);
+		dao.connectClose();
+	}
+	public static void withdrawAccount() {
+		AccountDAO dao = new AccountDAO();
+		dao.withdrawAccount("1001",10000);
+		dao.connectClose();
+	}
+	public static void transferAccount() {
+		AccountDAO dao = new AccountDAO();
+		dao.transferAccount("1001", "1002", 5000);
+		dao.connectClose();
 	}
 	public static void main(String[] args) {
 //		insertAccount();
 //		queryAccount();
-		depositAccount();
+//		depositAccount();
+//		withdrawAccount();
+//		queryAllAccounts();
+//		queryAccounts();
+//		querySpecialAccounts();
+		transferAccount();
 	}
 }
