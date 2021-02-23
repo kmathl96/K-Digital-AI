@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	a[target] { color: red; }
+	a[target="_self"] { color: orange; }
+	a[title~="pig"] { color: green; } /* pig라는 단어가 포함되어 있는 것(언더바 등으로 연결된 것은 미포함) */
+	a[title|="pig"] { color: red; } /* 단어의 시작이 pig인 것 */
+	a[title^="pig"] { color: red; } /* pig로 시작되는 것 */
+	a[title$="pig"] { color: red; } /* 단어가 pig로 끝나는 것 */
+	a[title*="pig"] { color: red; } /* pig가 있기만 하면 다 해당 */
+</style>
+</head>
+<body>
+	<a href="#">링크1</a>
+	<a href="#" target="_balank">링크2</a>
+	<a href="#" target="_self">링크3</a>
+	<hr>
+	
+	
+	<a href="#" title="pig">pig</a><br>
+	<a href="#" title="piggy">piggy</a><br>
+	<a href="#" title="pypig">pypig</a><br>
+	<a href="#" title="pig-dog">pig-dog</a><br>
+	<a href="#" title="pig-dat">pig-dat</a><br>
+	<a href="#" title="dog-pig">dog-pig</a><br>
+	<a href="#" title="dog pig">dog pig</a><br>
+	<a href="#" title="pig_dog">pig_dog</a><br>
+	<a href="#" title="pinkpigdog">pinkpigdog</a>
+</body>
+</html>

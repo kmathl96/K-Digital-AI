@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	li { list-style:none; padding:15px; }
+	
+	/* border-radius : 모서리 둥글게 */
+	li:first-child { border-radius: 10px 10px 0 0; }
+	li:last-child { border-radius: 0 0 10px 10px; }
+	
+	li:nth-child(2n) { background: red; }
+	li:nth-child(2n+1) { background: blue; }
+	
+	table>tbody>tr:nth-child(3n) { background: yellow; }
+</style>
+</head>
+<body>
+	<ul>
+		<li>첫 번째</li>
+		<li>두 번째</li>
+		<li>세 번째</li>
+		<li>네 번째</li>
+		<li>다섯 번째</li>
+		<li>여섯 번째</li>
+		<li>일곱 번째</li>
+		<li><a href="#">일곱 번째</a></li>
+	</ul>
+	<table border="1">
+		<tbody>
+			<tr><td>1</td><td>2</td></tr>
+			<tr><td>1</td><td>2</td></tr>
+			<tr><td>1</td><td>2</td></tr>
+			<tr><td>1</td><td>2</td></tr>
+			<tr><td>1</td><td>2</td></tr>
+			<tr><td>1</td><td>2</td></tr>
+			<tr><td>1</td><td>2</td></tr>
+			<tr><td>1</td><td>2</td></tr>
+			<tr><td>1</td><td>2</td></tr>
+			<tr><td>1</td><td>2</td></tr>
+		</tbody>
+	</table>
+</body>
+</html>
