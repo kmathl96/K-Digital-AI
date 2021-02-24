@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.before-text::before {
+		content: "->흥미진진!";
+		color: green;
+	}
+	.after-text::after {
+		content: "<-아자아자!";
+		color: red;
+	}
+	
+	/* selection 드래그 */
+	p::selection {
+		background: black;
+		color: orange;
+	}
+</style>
+</head>
+<body>
+<p class="before-text">정닥하고 평범한 심심한 글입니다.</p>
+<p>지루하지도 흥미진진하지도 않은 글입니다.</p>
+<p class="after-text">CSS는 쉽고 재미있습니다.</p>
+</body>
+</html>
