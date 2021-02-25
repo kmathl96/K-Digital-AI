@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+	$(function() {
+		$('form').submit(function(event) {
+			var value = $('#id').val();
+			if (value!='honggildong'){
+				alert('입력 오류');
+				event.preventDefault();
+			}
+		})
+	});
+</script>
+</head>
+<body>
+	<form action="login.html">
+		<table>
+			<tr>
+				<td>이름</td>
+				<td><input type='text' id='id'></td>	
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type='submit' value='login'></td>	
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

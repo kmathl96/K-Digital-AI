@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+	$(function() {
+/* 		$('img').attr('src','http://placehold.it/100x100');
+		$('img').attr('alt','jQuery 라이브러리 사용 속성 지정');
+		$('img').attr('width','100'); */
+		
+		/* 하나의 객체로 만들어서 넣어줌 */
+		$('img').attr({
+			src: 'http://placehold.it/100x100',
+			alt: 'jQuery 라이브러리 사용 속성 지정',
+			width: 100
+		});
+		
+		alert($('h1').attr('id'));
+	});
+</script>
+</head>
+<body>
+	<img alt="" src="">
+	<img alt="" src="">
+	<img alt="" src="">
+	
+	<h1 id="header">Header</h1>
+</body>
+</html>

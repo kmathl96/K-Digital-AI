@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+	$(function() {
+		var text = $('h1').text(); /* 모든 h1를 이어서 가져옴 */
+		var html = $('h1').html(); /* 맨 처음 h1만 가져옴 */
+		
+		alert(text);
+		alert(html);
+	});
+</script>
+</head>
+<body>
+	<h1>Header - 0</h1>
+	<h1>Header - 1</h1>
+</body>
+</html>

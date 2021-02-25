@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+	$(function() {
+		$('#check').change(function(event) {
+			if ($(this).prop('checked')) {
+				$('.page').show('fast');	
+			} else {
+				$('.page').hide(1000);
+			}
+		});
+	});
+</script>
+</head>
+<body>
+	<input id='check' type='checkbox' checked='checked'><label>show/hide</label>
+	<div class="page">
+		<h1>Lorem ipsum dolor sit amet</h1>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing slit.</p>
+	</div>
+</body>
+</html>

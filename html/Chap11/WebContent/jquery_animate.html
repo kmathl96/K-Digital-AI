@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+	$(function() {
+/* 		$('#box').css({
+			width: 100, height:100,
+			backgroundColor: 'red',
+		}).animate({
+			width: 300, opacity: 0.5,
+		}, 500).delay(1000).animate({
+			width:100, opacity: 1.0,
+		}, 500);
+*/
+		$('#box').css({
+			width: 0, height:100,
+			backgroundColor: 'red',
+		});
+		setInterval(function() {
+			$('#box').animate({
+				width: 300, opacity: 0.5,
+			}, 1000).delay(1000).animate({
+				width:0, opacity: 1.0,
+			}, 1000);
+		}, 3000);
+	});
+</script>
+</head>
+<body>
+	<div id='box'></div>
+</body>
+</html>
