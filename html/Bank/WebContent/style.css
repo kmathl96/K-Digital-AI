@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+header {
+	background: orange;
+	height: 72px;
+	line-height: 72px;
+	text-align: center;
+}
+nav {
+	overflow: hidden;
+}
+nav #accountMenu {
+	float: left;
+}
+nav #loginMenu {
+	float: right;
+}
+ul {
+	overflow: hidden;
+	padding: 10px;
+	padding-right: 40px;
+}
+li {
+	list-style: none;
+	width: 100px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	color: white;
+	background-color: gray;
+	border: 5px solid white;
+	border-color: white;
+	border-radius: 20px;
+	float: left;
+	box-shadow: 5px 5px 5px gray;
+}
+a {
+	text-decoration: none;
+}
+section {
+	background: lightGray;
+	padding: 20px;
+}
+article {
+	height: 500px;
+}
+article table {
+	margin: 0 auto;
+	text-align: center;
+}
+article h2 {
+	text-align: center;
+}
+select {
+	width: 100%;
+}
+input[type=radio] {
+	width: 20px;
+	height: 20px;
+	border: 1px;
+}
+input {
+	width: 100%;
+}
+footer {
+	background: gray;
+	height: 48px;
+	text-align: center;
+	line-height: 48px;
+}
