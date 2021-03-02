@@ -31,6 +31,7 @@
 | [2021-02-23 TUE](https://github.com/kmathl96/K-Digital-AI_TIL/blob/master/TIL/210223.md) :sunny: | HTML5 웹 프로그래밍 입문 4~7강     | - HTML5 문서 구조화<br />- CSS3<br />- 레이아웃 구성         |
 | [2021-02-24 WED](https://github.com/kmathl96/K-Digital-AI_TIL/blob/master/TIL/210224.md) :sunny: | HTML5 웹 프로그래밍 입문 7, 9~10강 | - 자바스크립트<br />- DOM                                    |
 | [2021-02-25 THU](https://github.com/kmathl96/K-Digital-AI_TIL/blob/master/TIL/210225.md) :cloud: | HTML5 웹 프로그래밍 입문 11강      | - jQuery                                                     |
+| [2021-03-02 TUE](https://github.com/kmathl96/K-Digital-AI_TIL/blob/master/TIL/210302.md) :sunny: | 자바 웹을 다루는 기술              | - Tomcat 설치 및 연결<br />- JSP 기초<br />- 서블릿          |
 
 
 
