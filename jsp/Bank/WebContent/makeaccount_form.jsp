@@ -1,52 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h2>[ 계좌개설 ]</h2>
-	<form action="#" id="createAccount" method="POST">
-		<table>
-			<tr>
-				<td><label for="accNo">계좌번호</label></td>
-				<td><input type="text" id="accNo"></td>
-			</tr>
-			<tr>
-				<td><label for="name">이름</label></td>
-				<td><input type="text" id="name"></td>
-			</tr>
-			<tr>
-				<td><label for="balance">입금액</label></td>
-				<td><input type="text" id="balance"></td>
-			</tr>
-			<tr>
-				<td><label for="account">계좌구분</label></td>
-				<td>
-					<div>
-						<input type="radio" name="radio" value="normal" checked="checked">일반&nbsp;
-						<input type="radio" name="radio" value="speacial">특수
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td><label for="grade">등급</label></td>
-				<td>
-					<select disabled="disabled">
-						<option value="V">VIP</option>
-						<option value="G">Gold</option>
-						<option value="S">Silver</option>
-						<option value="N">Normal</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input type="submit" value="개설"></td>
-			</tr>
-		</table>
-	</form>
-</body>
-</html>
+	pageEncoding="UTF-8"%>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+$(function() {
+	$('input[type=radio]').change(function() {
+		if($(this).val()=='normal') {
+			$('select').attr('disabled','disabled');
+		} else {
+			$('select').removeAttr('disabled');
+		}
+	});
+});
+</script>
+
+<form action="makeaccount.jsp" method="post" id="make_acc">
+	<h3>[ 계좌개설 ]</h3>
+	<table border="1">
+		<tr>
+			<td>계좌번호</td>
+			<td><input type="text" name="id" id="make_id" /></td>
+		</tr>
+		<tr>
+			<td>이름</td>
+			<td><input type="text" name="name" id="make_name" /></td>
+		</tr>
+		<tr>
+			<td>입금액</td>
+			<td><input type="text" name="balance" id="make_money" /></td>
+		</tr>
+		<tr>
+			<td>계좌구분</td>
+			<td><input type="radio" value="normal" name="sect"
+				checked="checked" /> 일반&nbsp;<input type="radio"
+				value="special" name="sect" /> 특수</td>
+		</tr>
+		<tr>
+			<td>등급</td>
+			<td><select name="grade" class="in" disabled="disabled" >
+					<option value="VIP">VIP</option>
+					<option value="Gold">Gold</option>
+					<option value="Silver">Silver</option>
+					<option value="Normal">Normal</option>
+			</select></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td colspan="2"><input type="submit"
+				value="개설" /></td>
+		</tr>
+	</table>
+</form>

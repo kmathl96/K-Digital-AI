@@ -33,6 +33,7 @@
 | [2021-02-25 THU](https://github.com/kmathl96/K-Digital-AI_TIL/blob/master/TIL/210225.md) :cloud: | HTML5 웹 프로그래밍 입문 11강      | - jQuery                                                     |
 | [2021-03-02 TUE](https://github.com/kmathl96/K-Digital-AI_TIL/blob/master/TIL/210302.md) :sunny: | 자바 웹을 다루는 기술              | - Tomcat 설치 및 연결<br />- JSP 기초<br />- 서블릿          |
 | [2021-03-03 WED](https://github.com/kmathl96/K-Digital-AI_TIL/blob/master/TIL/210303.md) :sunny: |                                    | - 내장 객체와 액션 태그<br />- 자바 빈<br />- 세션과 쿠키    |
+| [2021-03-04 THU](https://github.com/kmathl96/K-Digital-AI_TIL/blob/master/TIL/210304.md) :sunny: |                                    | - JSTL                                                       |
 
 
 
