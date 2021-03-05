@@ -1,4 +1,4 @@
-package com.servlet;
+package com.controller;
 
 import java.io.IOException;
 
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.bean.Account;
+import com.service.AccountService;
 
 /**
  * Servlet implementation class MakeAccount
@@ -44,15 +45,15 @@ public class MakeAccount extends HttpServlet {
 		acc.setSect(sect);
 		acc.setGrade(grade);
 		
-		HttpSession session = request.getSession();
-		if (session.getAttribute(id)==null) {
-			session.setAttribute(id, acc);
+		AccountService svc = new AccountService();
+		try {
+			svc.makeAccount(acc);
 			RequestDispatcher rd = request.getRequestDispatcher("template.jsp?page=makeaccount_success");
 			rd.forward(request, response);
-		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("template.jsp?page=makeaccount_fail");
+		} catch (Exception e) {
+			request.setAttribute("err", e.toString());
+			RequestDispatcher rd = request.getRequestDispatcher("template.jsp?page=err");
 			rd.forward(request, response);
 		}
-		
 	}
 }

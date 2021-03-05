@@ -1,4 +1,4 @@
-package com.servlet;
+package com.controller;
 
 import java.io.IOException;
 
@@ -11,18 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.bean.Account;
+import com.service.AccountService;
 
 /**
- * Servlet implementation class MakeAccount
+ * Servlet implementation class Withdraw
  */
-@WebServlet("/make_account")
-public class MakeAccount extends HttpServlet {
+@WebServlet("/withdraw")
+public class Withdraw extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MakeAccount() {
+    public Withdraw() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,26 +34,17 @@ public class MakeAccount extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("id");
-		String name = request.getParameter("name");
-		int balance= Integer.parseInt(request.getParameter("balance"));
-		String sect = request.getParameter("sect");
-		String grade = request.getParameter("grade");
-		Account acc = new Account();
-		acc.setId(id);
-		acc.setName(name);
-		acc.setBalance(balance);
-		acc.setSect(sect);
-		acc.setGrade(grade);
+		int money = Integer.parseInt(request.getParameter("money"));
 		
-		HttpSession session = request.getSession();
-		if (session.getAttribute(id)==null) {
-			session.setAttribute(id, acc);
-			RequestDispatcher rd = request.getRequestDispatcher("template.jsp?page=makeaccount_success");
+		AccountService svc = new AccountService();
+		try {
+			svc.withdraw(id, money);
+			RequestDispatcher rd = request.getRequestDispatcher("template.jsp?page=withdraw_success");
 			rd.forward(request, response);
-		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("template.jsp?page=makeaccount_fail");
+		} catch (Exception e) {
+			request.setAttribute("err", e.toString());
+			RequestDispatcher rd = request.getRequestDispatcher("template.jsp?page=err");
 			rd.forward(request, response);
 		}
-		
 	}
 }
