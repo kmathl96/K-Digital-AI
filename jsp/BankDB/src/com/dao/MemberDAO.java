@@ -51,8 +51,6 @@ public class MemberDAO {
 				mem.setSex(rset.getString(4));
 				mem.setAge(rset.getInt(5));
 				mem.setEmail(rset.getString(6));
-			} else {
-				throw new AccountException(BankErrCode.NOT_ACC);
 			}
 		} catch (Exception e) {
 			throw e;
