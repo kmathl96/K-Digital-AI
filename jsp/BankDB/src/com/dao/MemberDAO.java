@@ -4,11 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.bean.Account;
 import com.bean.Member;
 import com.db.JdbcUtil;
-import com.err.AccountException;
-import com.err.BankErrCode;
 
 public class MemberDAO {
 	public void insertMember(Member mem, Connection conn) throws Exception {
@@ -25,7 +22,7 @@ public class MemberDAO {
 			
 			int count = pstmt.executeUpdate();
 			if (count!=1) {
-				throw new Exception();
+				throw new Exception("회원가입 실패");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -51,6 +48,8 @@ public class MemberDAO {
 				mem.setSex(rset.getString(4));
 				mem.setAge(rset.getInt(5));
 				mem.setEmail(rset.getString(6));
+			} else {
+				throw new Exception("회원번호 오류");
 			}
 		} catch (Exception e) {
 			throw e;

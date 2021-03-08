@@ -33,7 +33,7 @@ public class Join extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("id");
-		String password = request.getParameter("password");
+		String password = request.getParameter("pass");
 		String name = request.getParameter("name");
 		String sex = request.getParameter("sex");
 		int age= Integer.parseInt(request.getParameter("age"));
@@ -48,11 +48,11 @@ public class Join extends HttpServlet {
 		
 		MemberService svc = new MemberService();
 		try {
-			svc.makeMember(mem);
-			RequestDispatcher rd = request.getRequestDispatcher("template.jsp?page=join_success");
+			svc.joinMember(mem);
+			RequestDispatcher rd = request.getRequestDispatcher("template.jsp?page=login_form");
 			rd.forward(request, response);
 		} catch (Exception e) {
-			request.setAttribute("err", e.toString());
+			request.setAttribute("err", e.getMessage());
 			RequestDispatcher rd = request.getRequestDispatcher("template.jsp?page=err");
 			rd.forward(request, response);
 		}

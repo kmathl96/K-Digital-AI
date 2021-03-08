@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.service.MemberService;
+import com.sun.source.tree.MemberSelectTree;
+
 /**
  * Servlet implementation class login
  */
@@ -29,13 +32,28 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("id");
-		if (id!=null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("id", id);
+		String password = request.getParameter("pass");
+		try {
+			if (id==null || password==null) {
+				throw new Exception("로그인 실패");
+			}
+			MemberService svc = new MemberService();
+			boolean success = svc.loginMember(id, password);
+			if (!success) {
+				throw new Exception("로그인 실패");
+			} else {
+				HttpSession session = request.getSession();
+				session.setAttribute("id", id);
+				RequestDispatcher rd = request.getRequestDispatcher("template.jsp?page=makeaccount_form");
+				rd.forward(request, response);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("err", e.getMessage());
+			RequestDispatcher rd = request.getRequestDispatcher("template.jsp?page=err");
+			rd.forward(request, response);
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("template.jsp?page=makeaccount_form");
-		rd.forward(request, response);
 	}
-
 }
