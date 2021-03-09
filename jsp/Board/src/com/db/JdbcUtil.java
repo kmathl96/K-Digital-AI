@@ -1,22 +1,39 @@
 package com.db;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 public class JdbcUtil {
 	public JdbcUtil() {}
+//	public static Connection getConnection() {
+//		Connection conn = null;
+//		try {
+//			Class.forName("oracle.jdbc.OracleDriver");
+//			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","hr","hr");
+//			conn.setAutoCommit(false);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//		return conn;
+//	}
 	public static Connection getConnection() {
 		Connection conn = null;
 		try {
-			Class.forName("oracle.jdbc.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","hr","hr");
+			Context initContext = new InitialContext();
+			DataSource ds = (DataSource)initContext.lookup("java:comp/env/oracleDB");
+			conn = ds.getConnection();
 			conn.setAutoCommit(false);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return conn;

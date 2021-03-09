@@ -51,7 +51,7 @@ h2 {
 		<section id="basicInfoArea">
 			제 목 : ${article.BOARD_SUBJECT }
 			첨부파일 :
-			<c:if test="${article.BOARD_FILE==null }">
+			<c:if test="${article.BOARD_FILE!=null }">
 				<a href="file_down?downFile=${article.BOARD_FILE}"> ${article.BOARD_FILE} </a>
 			</c:if>
 	</section>
