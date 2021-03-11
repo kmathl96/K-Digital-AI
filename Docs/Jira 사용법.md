@@ -73,11 +73,14 @@ https://www.atlassian.com/software/jira에 접속하여 로그인
    ![image-20210310040634863](./img/image-20210310040634863.png)
 5. Authorize Jira - Install Jira
    ![image-20210310040914689](./img/image-20210310040914689.png)
-   - 레포지토리 선택
-6. 
+   - 레포지토리 선택 후 Install
 
 
 
 # 참고 :books:
 
-https://engineering-skcc.github.io/devops-tools/Jirasetting/
+- 지라 시작하기
+  https://engineering-skcc.github.io/devops-tools/Jirasetting/
+- 지라-깃허브 연동 (스마트커밋)
+  https://sujinnaljin.medium.com/jira-jira%EC%99%80-github-%EC%97%B0%EB%8F%99%ED%95%98%EA%B8%B0-6e649180dfae
+
