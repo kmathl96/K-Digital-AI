@@ -3,7 +3,6 @@ package com.mulcam.bank;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,19 +29,26 @@ public class AccountController {
 	
 	@RequestMapping(value="/makeaccount", method=RequestMethod.POST)
 	public String makeAccount(HttpServletRequest request, Model model) {
+		Account acc = null;
 		try {
-			Account acc = new Account();
-			acc.setId(request.getParameter("id"));
-			acc.setName(request.getParameter("name"));
-			acc.setBalance(Integer.parseInt(request.getParameter("balance")));
-			acc.setSect(request.getParameter("sect"));
-			acc.setGrade(request.getParameter("grade"));
-			accountDao.insertAccount(acc);
-			model.addAttribute("page", "makeaccount_success");
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("err", "계좌 개설 실패");
+			acc = accountDao.queryAccount(request.getParameter("id"));
+			model.addAttribute("err", "계좌번호 중복");
 			model.addAttribute("page","err");
+		} catch (Exception e) {
+			try {
+				acc = new Account();
+				acc.setId(request.getParameter("id"));
+				acc.setName(request.getParameter("name"));
+				acc.setBalance(Integer.parseInt(request.getParameter("balance")));
+				acc.setSect(request.getParameter("sect"));
+				acc.setGrade(request.getParameter("grade"));
+				accountDao.insertAccount(acc);
+				model.addAttribute("page", "makeaccount_success");
+			} catch (Exception e1) {
+				e1.printStackTrace();
+				model.addAttribute("err", "계좌 개설 실패");
+				model.addAttribute("page","err");
+			}
 		}
 		return "template";
 	}
@@ -57,20 +63,15 @@ public class AccountController {
 	public String deposit(HttpServletRequest request, Model model) {
 		try {
 			String id = request.getParameter("id");
-			int money = Integer.parseInt(request.getParameter("money"));
-			
-			HttpSession session = request.getSession();
-			Account acc = (Account)session.getAttribute(id);
-			if (acc==null) {
-				model.addAttribute("err", "계좌번호 오류");
-				model.addAttribute("page","err");
-			} else {
-				acc.deposit(money);
-				// 입금 정보를 알려주기 위해 값을 넘겨줌
-				model.addAttribute("id", id);
-				model.addAttribute("money", money);
-				model.addAttribute("page", "deposit_success");
-			}
+			int money = Integer.parseInt(request.getParameter("money"));			
+
+			Account acc = accountDao.queryAccount(id); // null값일 경우 예외 반환
+			acc.deposit(money);
+			accountDao.updateAccBalance(acc);
+			// 입금 정보를 알려주기 위해 값을 넘겨줌
+			model.addAttribute("accid", id);
+			model.addAttribute("money", money);
+			model.addAttribute("page", "deposit_success");
 		} catch (Exception e) {
 			model.addAttribute("err", "입금 오류");
 			model.addAttribute("page", "err");
@@ -90,18 +91,15 @@ public class AccountController {
 			String id = request.getParameter("id");
 			int money = Integer.parseInt(request.getParameter("money"));
 			
-			HttpSession session = request.getSession();
-			Account acc = (Account)session.getAttribute(id);
-			if (acc==null) {
-				model.addAttribute("err", "계좌번호 오류");
-				model.addAttribute("page","err");
-			} else {
-				acc.withdraw(money);
-				// 출금 정보를 알려주기 위해 값을 넘겨줌
-				model.addAttribute("id", id);
-				model.addAttribute("money", money);
-				model.addAttribute("page", "withdraw_success");
-			}
+			Account acc = accountDao.queryAccount(id);
+			if (acc==null) throw new Exception();
+			boolean success = acc.withdraw(money);
+			if (success==false) throw new Exception();
+			accountDao.updateAccBalance(acc);
+			// 출금 정보를 알려주기 위해 값을 넘겨줌
+			model.addAttribute("accid", id);
+			model.addAttribute("money", money);
+			model.addAttribute("page", "withdraw_success");
 		} catch (Exception e) {
 			model.addAttribute("err", "출금 오류");
 			model.addAttribute("page", "err");
@@ -116,11 +114,12 @@ public class AccountController {
 	}
 
 	@RequestMapping(value="/accinfo", method=RequestMethod.POST)
-	public ModelAndView accinfo(HttpServletRequest request, Model model) {
+	public ModelAndView accinfo(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
 			String id = request.getParameter("id");
 			Account acc = accountDao.queryAccount(id);
+			if (acc==null) throw new Exception();
 			modelAndView.addObject("acc", acc);
 			modelAndView.addObject("page", "accinfo_success");
 		} catch (Exception e) {

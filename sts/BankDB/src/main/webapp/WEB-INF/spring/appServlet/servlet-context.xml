@@ -25,7 +25,10 @@
 		
 	<!-- bean -->
 	<!-- 실제로 객체 생성 가능한 건 Impl이므로 class에 Impl 넣음 -->
-	<beans:bean id="accountDao" class="com.mulcam.bank.dao.AccountDAOImpl" p:dataSource-ref="dataSource"/>
+	<!-- dao에 setter가 있어야 함 -->
+	<beans:bean id="accountDao" class="com.mulcam.bank.dao.AccountDAOImpl" p:dataSource-ref="dataSource"/> <!-- root-context의 id와 같음 -->
 	<beans:bean id="accountController" class="com.mulcam.bank.AccountController" p:accountDao-ref="accountDao"/>
+	<beans:bean id="memberDao" class="com.mulcam.bank.dao.MemberDAOImpl" p:dataSource-ref="dataSource"/>
+	<beans:bean id="memberController" class="com.mulcam.bank.MemberController" p:memberDao-ref="memberDao"/>
 	
 </beans:beans>
