@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -76,18 +75,23 @@ public class MemberControllerImpl implements MemberController {
 	}
 	
 	@RequestMapping(value = "/member/*Form.do", method =  RequestMethod.GET)
-	private ModelAndView form(@RequestParam(value= "result", required=false) String result, // required=false : 꼭 있을 필요는 없음
-			                  @RequestParam(value= "action", required=false) String action,
-			                  HttpServletRequest request, 
-			                  HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
-		HttpSession session = request.getSession();
-		session.setAttribute("action", action); 
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("result",result);
-		mav.setViewName(viewName);
-		return mav;
+	private void form() {
+		return;
 	}
+	
+//	@RequestMapping(value = "/member/*Form.do", method =  RequestMethod.GET)
+//	private ModelAndView form(@RequestParam(value= "result", required=false) String result, // required=false : 꼭 있을 필요는 없음
+//			                  @RequestParam(value= "action", required=false) String action,
+//			                  HttpServletRequest request, 
+//			                  HttpServletResponse response) throws Exception {
+//		String viewName = (String)request.getAttribute("viewName");
+//		HttpSession session = request.getSession();
+//		session.setAttribute("action", action); 
+//		
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("result",result);
+//		mav.setViewName(viewName);
+//		return mav;
+//	}
 
 }
