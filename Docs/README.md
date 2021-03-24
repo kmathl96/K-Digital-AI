@@ -38,7 +38,8 @@
 | [2021-03-10 WED](./TIL/210310.md) :sunny:                    | 자바 웹을 다루는 기술 21~22강      | - MVC<br />- JDBC                                            |
 | [2021-03-11 THU](./TIL/210311.md) :sunny:                    | 자바 웹을 다루는 기술 23강         | 복습 및 실습<br />- Mybatis                                  |
 | [2021-03-19 FRI](./TIL/210319.md) :sunny:                    |                                    | - Spring boot                                                |
-| [2021-03-23 TUE](./TIL/210323.md) :sunny:                    | 자바 웹을 다루는 기술 26, 29강     | - Annotation<br />- REST API                                 |
+| [2021-03-23 TUE](./TIL/210323-210324.md) :sunny:             | 자바 웹을 다루는 기술 26, 29강     | - Annotation<br />- REST API                                 |
+| [2021-03-24 WED](./TIL/210323-210324.md#rest-api) :sunny:    | 자바 웹을 다루는 기술 29강         | - REST API<br />- 객체 지향 방법론                           |
 
 
 

@@ -66,7 +66,18 @@ public class BoardController {
 			logger.info(articleVO.toString());
 			resEntity = new ResponseEntity("ADD_SUCCESSED", HttpStatus.OK);
 		} catch (Exception e) {
-			e.printStackTrace();
+			resEntity = new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return resEntity;
+	}
+	
+	@RequestMapping(value="/{articleNO}", method=RequestMethod.DELETE)
+	public ResponseEntity<String> modArticle(@PathVariable("articleNO") Integer articleNO) {
+		ResponseEntity<String> resEntity = null;
+		try {
+			logger.info("addArticle 메소드 호출");
+			resEntity = new ResponseEntity("ADD_SUCCESSED", HttpStatus.OK);
+		} catch (Exception e) {
 			resEntity = new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		return resEntity;
